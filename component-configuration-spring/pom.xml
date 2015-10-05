@@ -4,7 +4,7 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.bms</groupId>
+		<groupId>com.github.dmulcahey</groupId>
 		<artifactId>component-configuration</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -32,7 +32,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.bms</groupId>
+			<groupId>com.github.dmulcahey</groupId>
 			<artifactId>component-configuration-manager</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
