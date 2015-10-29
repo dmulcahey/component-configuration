@@ -1,1 +1,1 @@
-# component-configuration-manager
+# component-configuration
