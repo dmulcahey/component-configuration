@@ -6,7 +6,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 @Configuration
-@ComponentScan(basePackages="com.bms.enterpriseconfiguration.configuration.component.spring.bean.processor")
+@ComponentScan(basePackages="com.github.dmulcahey.componentconfiguration.spring")
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class InjectorConfiguration {
 
