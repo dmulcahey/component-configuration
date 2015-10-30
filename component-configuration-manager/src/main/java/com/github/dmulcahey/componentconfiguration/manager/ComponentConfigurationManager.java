@@ -179,7 +179,7 @@ public class ComponentConfigurationManager {
 	@SneakyThrows
 	private static void registerMXBean(){
 		MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer(); 
-        ObjectName objectName = new ObjectName("com.bms.enterpriseconfiguration.configuration.component.management:type=ComponentConfigurationManagerMXBean");
+        ObjectName objectName = new ObjectName("com.github.dmulcahey.componentconfiguration.manager.management:type=ComponentConfigurationManagerMXBean");
         mBeanServer.registerMBean(new ComponentConfigurationManagerMXBeanImpl(), objectName); 
 	}
 	

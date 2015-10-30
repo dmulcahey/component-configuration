@@ -36,7 +36,7 @@ public class ComponentConfigurationManagerMXBeanImplTest {
 		    jmxServiceURL = jmxConnectorServer.getAddress();
 		    jmxConnector = JMXConnectorFactory.connect(jmxServiceURL);
 		    MBeanServerConnection mBeanServerConnection = jmxConnector.getMBeanServerConnection();
-	        ObjectName objectName = new ObjectName("com.bms.enterpriseconfiguration.configuration.component.management:type=ComponentConfigurationManagerMXBean");
+	        ObjectName objectName = new ObjectName("com.github.dmulcahey.componentconfiguration.manager.management:type=ComponentConfigurationManagerMXBean");
 	        assertEquals(16, mBeanServerConnection.getMBeanInfo(objectName).getOperations().length);
 	        for(MBeanOperationInfo mBeanOperationInfo : mBeanServerConnection.getMBeanInfo(objectName).getOperations()){
 	        	Logger.getAnonymousLogger().info("Operation: " + mBeanOperationInfo.getName());
