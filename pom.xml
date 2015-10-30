@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>component-configuration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
-	
+
 	<parent>
 		<groupId>com.github.dmulcahey</groupId>
 		<artifactId>parent-pom</artifactId>
@@ -22,6 +23,24 @@
 		<maven.compiler.testSource>${java.version}</maven.compiler.testSource>
 		<maven.compiler.testTarget>${java.version}</maven.compiler.testTarget>
 	</properties>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/dmulcahey/component-configuration/issues</url>
+	</issueManagement>
+
+	<inceptionYear>2013</inceptionYear>
+
+	<scm>
+		<connection>scm:git:https://github.com/dmulcahey/component-configuration.git</connection>
+		<developerConnection>scm:git:git@github.com:dmulcahey/component-configuration.git</developerConnection>
+		<url>https://github.com/dmulcahey/component-configuration</url>
+	</scm>
+
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/dmulcahey/component-configuration</url>
+	</ciManagement>
 
 	<dependencies>
 		<dependency>
@@ -45,8 +64,8 @@
 	</dependencies>
 
 	<modules>
-    <module>component-configuration-manager</module>
-    <module>component-configuration-spring</module>
-  </modules>
+		<module>component-configuration-manager</module>
+		<module>component-configuration-spring</module>
+	</modules>
 
 </project>
