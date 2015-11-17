@@ -4,11 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.logging.Logger;
 
-import org.jasypt.util.text.StrongTextEncryptor;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import com.github.dmulcahey.componentconfiguration.manager.ComponentConfigurationManager;
 import com.github.dmulcahey.configurationresolver.configuration.FileBasedConfiguration;
 import com.github.dmulcahey.configurationresolver.resources.classpath.ClasspathResource;
 
@@ -38,14 +35,6 @@ public class ComponentConfigurationManagerTest {
 		assertNotNull(ComponentConfigurationManager.getResource("Configuration", "someFolder/someResource.xml", "JUNIT"));
 		assertNotNull(ComponentConfigurationManager.getResource("Configuration", "someOtherFolder/someResource.xml", "JUNIT"));
 		assertNotNull(ComponentConfigurationManager.getResource("Configuration", "junkXML.xml", "JUNIT"));
-	}
-	
-	@Test
-	@Ignore
-	public void encryptValue(){
-		StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
-		textEncryptor.setPassword("TESTING");
-		Logger.getAnonymousLogger().info(textEncryptor.encrypt("encryptMe"));
 	}
 	
 }
