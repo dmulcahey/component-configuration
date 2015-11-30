@@ -15,7 +15,7 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 import lombok.SneakyThrows;
-import lombok.extern.apachecommons.CommonsLog;
+import lombok.extern.slf4j.Slf4j;
 
 import com.github.dmulcahey.componentconfiguration.manager.classpath.CombinedClasspathConfigurationProxy;
 import com.github.dmulcahey.componentconfiguration.manager.management.ComponentConfigurationManagerMXBeanImpl;
@@ -27,7 +27,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.reflect.Reflection;
 
-@CommonsLog
+@Slf4j
 public class ComponentConfigurationManager {
 	public static final String FORCE_COMPLETE_INITIALIZATION_ARGUMENT = "cfgmgr.forceCompleteInitialization";
 	private static final ComponentConfigurationResolver COMPONENT_CONFIGURATION_RESOLVER = new ComponentConfigurationResolver();
@@ -105,11 +105,11 @@ public class ComponentConfigurationManager {
 		checkNotNull(componentName, "The componentName can not be null!");
 		checkNotNull(environment, "The environment can not be null!");
 		if(!COMPONENT_CONFIGURATIONS_BY_ENVIRONMENT.containsKey(environment)){
-			log.fatal("There are no component configurations loaded for environment: " + environment);
+			log.error("There are no component configurations loaded for environment: {}", environment);
 			throw new RuntimeException("There are no component configurations loaded for environment: " + environment);
 		}
 		if(!COMPONENT_CONFIGURATIONS_BY_ENVIRONMENT.get(environment).containsKey(componentName)){
-			log.fatal("There are no component configurations loaded for component name: " + componentName);
+			log.error("There are no component configurations loaded for component name: {}", componentName);
 			throw new RuntimeException("There are no component configurations loaded for component name: " + componentName);
 		}
 		return COMPONENT_CONFIGURATIONS_BY_ENVIRONMENT.get(environment).get(componentName);
@@ -142,33 +142,33 @@ public class ComponentConfigurationManager {
 		ClassPath classPath = ClassPath.from(Thread.currentThread().getContextClassLoader());
 		FORCE_COMPLETE_INITIALIZATION = Optional.fromNullable(System.getProperty(FORCE_COMPLETE_INITIALIZATION_ARGUMENT));
 		Set<String> componentNames = ClasspathResourceUtil.getSubdirectoryNamesFromParentDirectory(classPath, ComponentConfigurationResolver.COMPONENT_RESOURCES);
-		log.info("Components on classpath: " + componentNames);
+		log.info("Components on classpath: {}", componentNames);
 		if(componentNames.size() == 1){
 			DEFAULT_COMPONENT_NAME = Optional.of(componentNames.iterator().next());
-			log.info("Default component name set to: " + DEFAULT_COMPONENT_NAME.get());
+			log.info("Default component name set to: {}", DEFAULT_COMPONENT_NAME.get());
 		}
 		if(!Strings.isNullOrEmpty(ComponentConfigurationResolver.DEFAULT_ENVIRONMENT) && !FORCE_COMPLETE_INITIALIZATION.isPresent()){
-			log.info("Default environment detected - Component configurations will only be initialized for the " + ComponentConfigurationResolver.DEFAULT_ENVIRONMENT + " environment");
+			log.info("Default environment detected - Component configurations will only be initialized for the {} environment", ComponentConfigurationResolver.DEFAULT_ENVIRONMENT);
 			initializeComponentConfigurationsForEnvironment(componentNames, ComponentConfigurationResolver.DEFAULT_ENVIRONMENT, classPath);
 		}else{
 			Set<String> environmentNames = ClasspathResourceUtil.getSubdirectoryNamesFromParentDirectory(classPath, ComponentConfigurationResolver.ENVIRONMENT_RESOURCES);
 			if(environmentNames.isEmpty()){
 				throw new RuntimeException("There were no environment resources detected on the classpath. Please check the classpath / jvm arguments to ensure they are correct!");
 			}
-			log.info("Environments on classpath: " + environmentNames);
+			log.info("Environments on classpath: {}", environmentNames);
 			for(String environmentName : environmentNames){
 				initializeComponentConfigurationsForEnvironment(componentNames, environmentName, classPath);
 			}
 		}
-		log.debug("All fully resolved component configurations by environment: " + COMPONENT_CONFIGURATIONS_BY_ENVIRONMENT);
+		log.debug("All fully resolved component configurations by environment: {}", COMPONENT_CONFIGURATIONS_BY_ENVIRONMENT);
 		log.info("initializing complete!");
 	}
 	
 	private static void initializeComponentConfigurationsForEnvironment(Set<String> componentNames, String environmentName, ClassPath classPath){
-		log.debug("Initializing component configurations for environment: " + environmentName);
+		log.debug("Initializing component configurations for environment: {}", environmentName);
 		ConcurrentHashMap<String, ComponentConfiguration> componentConfigurations = new ConcurrentHashMap<String, ComponentConfiguration>();
 		for(String componentName : componentNames){
-			log.debug("Initializing component configuration: " + componentName + " for environment: " + environmentName);
+			log.debug("Initializing component configuration: {} for environment: {}", componentName, environmentName);
 			componentConfigurations.put(componentName, COMPONENT_CONFIGURATION_RESOLVER.resolve(new ComponentConfigurationResolver.Criteria(componentName, environmentName, classPath)));
 		}
 		COMPONENT_CONFIGURATIONS_BY_ENVIRONMENT.put(environmentName, componentConfigurations);

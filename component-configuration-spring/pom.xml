@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.github.dmulcahey</groupId>
 		<artifactId>component-configuration</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>component-configuration-spring</artifactId>
@@ -18,7 +18,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
-				<version>4.1.6.RELEASE</version>
+				<version>4.2.3.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

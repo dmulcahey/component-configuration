@@ -12,9 +12,9 @@ import com.github.dmulcahey.componentconfiguration.manager.annotation.ComponentC
 import com.github.dmulcahey.componentconfiguration.manager.annotation.ComponentConfigurationResolverPostresolutionTest;
 import com.github.dmulcahey.componentconfiguration.manager.annotation.ComponentConfigurationResolverPreresolutionActivity;
 import com.github.dmulcahey.componentconfiguration.manager.annotation.ComponentConfigurationResolverPreresolutionTest;
+import com.github.dmulcahey.componentconfiguration.manager.util.PropertyUtil;
 import com.github.dmulcahey.configurationresolver.configuration.ConfigurationDescriptorResolver;
 import com.github.dmulcahey.configurationresolver.configuration.classpath.CombinedClasspathConfigurationResolver;
-import com.github.dmulcahey.configurationresolver.configuration.classpath.util.PropertyUtil;
 import com.github.dmulcahey.configurationresolver.resources.classpath.ClassPath;
 import com.github.dmulcahey.configurationresolver.resources.classpath.ClasspathResource;
 import com.github.dmulcahey.configurationresolver.resources.classpath.FilteredClasspathResourceResourceProvider;
