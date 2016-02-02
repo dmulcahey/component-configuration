@@ -41,7 +41,7 @@ public class ComponentConfigurationManager {
 			String classpathAugment = System.getProperty("cfgmgr.classpath");
 			if(!Strings.isNullOrEmpty(classpathAugment)){
 				String[] pathAugmentsToAdd = classpathAugment.split(File.pathSeparator);
-				URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+				URLClassLoader contextLoader = (URLClassLoader) Thread.currentThread().getContextClassLoader();
 		        Class<URLClassLoader> sysclass = URLClassLoader.class;
 		        Method method = null;
 		        try {
@@ -52,7 +52,7 @@ public class ComponentConfigurationManager {
 	            method.setAccessible(true);
 				for(String classpathAugmentToAdd : pathAugmentsToAdd){
 					try {
-			            method.invoke(sysloader, new Object[] {new File(classpathAugmentToAdd).toURI().toURL()});
+			            method.invoke(contextLoader, new Object[] {new File(classpathAugmentToAdd).toURI().toURL()});
 			            log.info("Augmented runtime classpath: " + classpathAugmentToAdd + " was added to the System class loader...");
 			        } catch (Throwable t) {
 			            t.printStackTrace();
