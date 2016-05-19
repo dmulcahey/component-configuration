@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.github.dmulcahey</groupId>
 		<artifactId>component-configuration</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<artifactId>component-configuration-spring</artifactId>
